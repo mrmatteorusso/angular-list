@@ -48,7 +48,8 @@
     <li *ngFor="let country of countries; index as i">
         <h3>{{ this.countries[i].name}}</h3>
         <button (click)="this.countries[i].hideMain = !this.countries[i].hideMain">
-            <!-- <fa-icon [ngClass]=" this.countries[i].hideMain ? [icon]='faPlus' : [icon]='faMinus' " ></fa-icon> -->
+            <fa-icon *ngIf="this.countries[i].hideMain" [icon]="faPlus" ></fa-icon>
+            <fa-icon *ngIf="!this.countries[i].hideMain" [icon]="faMinus" ></fa-icon>
         </button>
         <ul *ngIf="!this.countries[i].hideMain">
             <li *ngIf="this.countries[i].show">{{this.countries[i].language}}</li>
