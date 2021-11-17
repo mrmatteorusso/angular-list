@@ -1,0 +1,68 @@
+<button class="btn btn-dark" (click)="this.showCountry = !this.showCountry">add user</button>
+<div class="card card-body mb-3" *ngIf="showCountry">
+    <h2>please add user</h2>
+    <form (click)="OnSummit($event)">
+        <div class="form-group">
+            <label>Country Name</label>
+            <input type="text" [(ngModel)]="country.name" class="form-control" name="countryName">
+        </div>
+        {{ country.name }}
+        <div class="form-group">
+            <label>Language</label>
+            <input [(ngModel)]="country.language" type="text" class="form-control" name="language">
+        </div>
+        <div class="form-group">
+            <label>Population</label>
+            <input [(ngModel)]="country.population" type="number" class="form-control" name="population">
+        </div>
+        <div class="form-group">
+            <label>Area</label>
+            <input [(ngModel)]="country.area" type="number" class="form-control" name="area">
+        </div>
+
+        <div class="form-group">
+            <label>Agriculture</label>
+            <input [(ngModel)]="country.economy.agriculture" type="number" class="form-control" name="agriculture">
+        </div>
+        <div class="form-group">
+            <label>Energy</label>
+            <input [(ngModel)]="country.economy.energy" type="number" class="form-control" name="energy">
+        </div>
+        <div class="form-group">
+            <label>Tourism</label>
+            <input [(ngModel)]="country.economy.energy" type="number" class="form-control" name="turism">
+        </div>
+
+
+
+        <button (click)="addNewCountry()">Add New Country</button>
+
+    </form>
+</div>
+
+<h1>Country list</h1>
+<fa-icon [icon]="faCoffee"></fa-icon>
+<fa-icon [icon]="faMinus"></fa-icon>
+
+<ul>
+    <li *ngFor="let country of countries; index as i">
+        <h3>{{ this.countries[i].name}}</h3>
+        <button (click)="this.countries[i].hideMain = !this.countries[i].hideMain">
+            <!-- <fa-icon [ngClass]=" this.countries[i].hideMain ? [icon]='faPlus' : [icon]='faMinus' " ></fa-icon> -->
+        </button>
+        <ul *ngIf="!this.countries[i].hideMain">
+            <li *ngIf="this.countries[i].show">{{this.countries[i].language}}</li>
+            <li>{{this.countries[i].population }}</li>
+            <li>{{this.countries[i].area}}</li>
+            <button (click)="this.countries[i].hideSub = !this.countries[i].hideSub">Economy</button>
+
+        </ul>
+        <ul *ngIf="this.countries[i].hideSub">
+            <li class="high mid low">{{this.countries[i].economy.agriculture}} %</li>
+            <li class="high mid low">{{this.countries[i].economy.energy}} %</li>
+            <li class="high mid low">{{this.countries[i].economy.turism}} %</li>
+
+        </ul>
+    </li>
+
+</ul>
